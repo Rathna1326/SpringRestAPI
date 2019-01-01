@@ -22,7 +22,9 @@ public class TaskManagerDAOImpl implements TaskManagerDAO {
 	@Override
 	public Task saveTask(Task task) {
 		// TODO Auto-generated method stub
-		return taskRepository.save(task);
+		task=taskRepository.save(task);
+		taskRepository.flush();
+		return task;
 	}
 
 	@Override
@@ -39,7 +41,9 @@ public class TaskManagerDAOImpl implements TaskManagerDAO {
 	taskFrmDB.setPriority(task.getPriority());
 	taskFrmDB.setStart_date(task.getStart_date());
 	taskFrmDB.setEnd_date(task.getEnd_date());
+	taskFrmDB.setProject(task.getProject());
 	taskRepository.save(taskFrmDB);
+	taskRepository.flush();
 	return taskFrmDB;
 	}
 
@@ -50,6 +54,12 @@ public class TaskManagerDAOImpl implements TaskManagerDAO {
 		  return true;
 		else
 	      return false;
+	}
+
+	@Override
+	public List<Task> getAllTasksByProjectName(String projectName) {
+		// TODO Auto-generated method stub
+		return taskRepository.findByProject_ProjectName(projectName);
 	}
 	
 }

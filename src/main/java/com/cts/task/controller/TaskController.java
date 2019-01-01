@@ -73,4 +73,9 @@ public class TaskController {
 	} 
 	 
 	
+	@RequestMapping(value="/getTasksByProject/{projectName}",method = RequestMethod.GET,headers="Accept=application/json")
+	  public List<TaskVO> getAllTasksByProjectName(@PathVariable String projectName) {  
+	   List<TaskVO> taskVOs=taskManagerService.getAllTasksByProjectName(projectName);
+	   return taskVOs;
+	  }
 }

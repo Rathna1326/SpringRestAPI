@@ -1,6 +1,8 @@
 package com.cts.task.entity;
 
 import java.sql.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,24 +12,21 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "TASK")
-public class Task {
+@Table(name = "PROJECT")
+public class Project {
 
-	 @Id
-	 @GeneratedValue(strategy = GenerationType.AUTO)  
-	 @Column(name = "task_id")
-	 private int taskId;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)  
+	 @Column(name = "project_id")
+	 private int projectId;
 	 
-	 @Column(name = "task")
-	 private String taskName;
-	 
-	 @Column(name = "parent_id")
-	 private int parent_id;
+	 @Column(name = "project_name")
+	 private String projectName;
 	 
 	 @Column(name = "start_date")
 	 private Date start_date;
@@ -41,30 +40,27 @@ public class Task {
 	 @Column(name = "active_flag")
 	 private String activeFlag;
 	 
-	 
-	 @ManyToOne(fetch = FetchType.LAZY)
-	 @JoinColumn(name = "project_id")
-	 private Project project;
-	 
-	 @OneToOne(fetch = FetchType.LAZY,cascade =  CascadeType.ALL,mappedBy = "task")
+	 @OneToOne(fetch = FetchType.LAZY,mappedBy="project",cascade = CascadeType.ALL)
 	 private User user;
+	 
+	 
+	 @OneToMany(fetch = FetchType.LAZY,mappedBy="project")
+	 private Set<Task> tasks= new HashSet<Task>();
 
-	public int getTask_id() {
-		return taskId;
+	public int getProject_id() {
+		return projectId;
 	}
 
-	public void setTask_id(int task_id) {
-		this.taskId = task_id;
+	public void setProject_id(int project_id) {
+		this.projectId = project_id;
 	}
 
-	
-
-	public int getParent_id() {
-		return parent_id;
+	public String getProject_name() {
+		return projectName;
 	}
 
-	public void setParent_id(int parent_id) {
-		this.parent_id = parent_id;
+	public void setProject_name(String project_name) {
+		this.projectName = project_name;
 	}
 
 	public Date getStart_date() {
@@ -91,20 +87,21 @@ public class Task {
 		this.priority = priority;
 	}
 
-	public String getTaskName() {
-		return taskName;
-	}
-
-	public void setTaskName(String taskName) {
-		this.taskName = taskName;
-	}
-
 	public String getActiveFlag() {
 		return activeFlag;
 	}
 
 	public void setActiveFlag(String activeFlag) {
 		this.activeFlag = activeFlag;
+	}
+
+	
+	public Set<Task> getTasks() {
+		return tasks;
+	}
+
+	public void setTasks(Set<Task> tasks) {
+		this.tasks = tasks;
 	}
 
 	public User getUser() {
@@ -114,13 +111,4 @@ public class Task {
 	public void setUser(User user) {
 		this.user = user;
 	}
-
-	public Project getProject() {
-		return project;
-	}
-
-	public void setProject(Project project) {
-		this.project = project;
-	}
-	
 }

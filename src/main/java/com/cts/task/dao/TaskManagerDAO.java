@@ -15,4 +15,6 @@ public interface TaskManagerDAO {
 	Task updateTask(Task task);
 	
 	boolean endTask(String taskName);
+	
+	List<Task> getAllTasksByProjectName(String projectName);
 }

@@ -15,4 +15,6 @@ public interface TaskManagerService {
 	TaskVO updateTask(TaskVO taskVO);
 	
 	boolean endTask(String taskName);
+	
+	List<TaskVO> getAllTasksByProjectName(String projectName);
 }

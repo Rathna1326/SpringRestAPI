@@ -4,19 +4,21 @@ import java.util.Date;
 
 public class TaskVO {
 	
-	private int task_id;
+	private int taskId;
 	private String taskName;
 	private int parent_task_id;
 	private Date start_date;
 	private Date end_date;
 	private int priority;
 	private String activeFlag;
+	private int project_id;
+	private int userId;
 	
 	public int getTask_id() {
-		return task_id;
+		return taskId;
 	}
 	public void setTask_id(int task_id) {
-		this.task_id = task_id;
+		this.taskId = task_id;
 	}
 	
 	public int getParent_task_id() {
@@ -54,6 +56,24 @@ public class TaskVO {
 	}
 	public void setActiveFlag(String activeFlag) {
 		this.activeFlag = activeFlag;
+	}
+	public int getProject_id() {
+		return project_id;
+	}
+	public void setProject_id(int project_id) {
+		this.project_id = project_id;
+	}
+	public int getTaskId() {
+		return taskId;
+	}
+	public void setTaskId(int taskId) {
+		this.taskId = taskId;
+	}
+	public int getUserId() {
+		return userId;
+	}
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 
 	

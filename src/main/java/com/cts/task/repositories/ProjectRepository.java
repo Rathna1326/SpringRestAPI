@@ -9,22 +9,24 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.cts.task.entity.Task;
+import com.cts.task.entity.Project;
 
 @Repository
-public interface TaskRepository extends JpaRepository<Task, Integer>{
+public interface ProjectRepository extends JpaRepository<Project, Integer> {
 
 	@Override
-	List<Task> findAll();
+	List<Project> findAll();
 	
-	public <S extends Task> S save(S arg0);
+	public <S extends Project> S save(S arg0);
 	
-	Task findByTaskName(String task_name);
+	Project findByProjectName(String project_name);
 	
+	Project findByProjectId(int projectId);
+	
+
 	@Modifying
 	@Transactional
-	@Query("UPDATE Task task SET task.activeFlag = :activeFlag WHERE task.taskName = :taskName")
-    int updateTask(@Param("activeFlag") String activeFlag, @Param("taskName") String taskName);
+	@Query("UPDATE Project pro SET pro.activeFlag='N' where pro.projectId = :project_id")
+    int deleteProject(@Param("project_id") int project_id);
 	
-	List<Task> findByProject_ProjectName(String projectName);
 }
